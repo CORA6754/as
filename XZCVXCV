@@ -1,0 +1,17 @@
+import keyboard
+import requests
+
+endpoint = '#ADD MOCKAPI ENDPOINT'
+data = requests.get(endpoint + "/1").json()
+
+def on_key_press(event):
+    if event.name == "space":
+        data["name"] = data["name"] + " "
+    else:
+        data["name"] = data["name"] + event.name
+    myobj = {'name': data["name"]}
+    requests.put(endpoint + "/1", json = myobj)
+
+keyboard.on_press(on_key_press)
+
+keyboard.wait()
